@@ -9,6 +9,7 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+    flex-direction: column; /* Stack items vertically */
 }
 
 h1 {
@@ -16,8 +17,6 @@ h1 {
     color: #fff;
     z-index: 2;
     margin-top: 20px; /* Adds space from the top */
-    position: absolute; /* Fix position at the top */
-    top: 0; /* Aligns at the very top of the page */
     width: 100%; /* Span full width */
     text-align: center; /* Center align the text */
 }
@@ -26,7 +25,7 @@ h1 {
     position: relative;
     display: inline-block;
     z-index: 2;
-    margin-top: 100px; /* Adjust margin for dropdown to fit after the heading */
+    margin-top: 20px; /* Space between heading and button */
 }
 
 .dropbtn {
