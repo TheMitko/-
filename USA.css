@@ -1,0 +1,128 @@
+body
+{
+    background-color: #BC6A34;
+}
+.imgbox {
+    position: relative;
+    display: grid;
+    height: 100%;
+    z-index: -1;
+}
+.center-fit {
+    z-index: -1;
+    position: relative;
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+}
+
+.button {
+    position: absolute;
+    top: 10px;
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+
+button {
+    width: 40px; /* Width of the button */
+    height: 40px; /* Height of the button */
+    border-radius: 50%; /* Makes the button round */
+    background-color: yellow; /* Button background color */
+    z-index: 5;
+    position: absolute;
+    cursor: pointer;
+}
+
+.NewYork { left: 1160px; top: 219px;}
+.Washington { left: 1137px; top: 305px; }
+.Charlotte { left: 1079px; top: 394px; }
+.Apalachicola { left: 1015px; top: 473px; }
+.Orlando { left: 1087px; top: 527px; }
+.Miami { left: 1107px; top: 578px; }
+.NewOrleans { left: 927px; top: 473px; }
+.Austin {left: 781px; top: 491px; }
+.Houston {left: 809px; top: 550px; }
+.Memphis { left: 943px; top: 367px; }
+.Cincinnati { left: 1029px; top: 287px;  width: 45px;  height: 45px;}
+.Toronto { left: 1039px; top: 199px; }
+.Montreal { left: 1117px; top: 116px; }
+.Quebec { left: 1111px; top: 24px; }
+.Ontario { left: 1012px; top: 74px; }
+.SaintMary {left: 970px; top: 141px; }
+.Michigan { left: 975px; top: 198px;  width: 37px;  height: 37px; }
+.Minneapolis {left: 866px; top: 170px; width: 42px;  height: 42px;}
+.Chicago {left: 921px; top: 255px; }
+.SaintLuis { left: 936px; top: 311px; }
+.KansasCity {left: 817px; top: 254px; }
+.Winnipeg {left: 789px; top: 98px; }
+.OklahomaCity {left: 827px; top: 362px; }
+.Nipigon {left:900px; top: 56px; }
+.Manitoba {left: 754px; top: 6px; width: 34px;  height: 34px;}
+.ColdLake {left: 668px; top: 6px; width: 30px;  height: 30px;}
+.Edmonton {left: 588px; top: 9px; width: 32px;  height: 32px;}
+.PrinceGeorge { left: 497px; top: 16px;  width: 30px;  height: 30px;}
+.Campbell { left: 419px; top: 28px; width: 31px;  height: 31px;}
+.Vancouver { left: 448px; top: 50px; width: 32px;  height: 32px;}
+.Seattle {left: 445px; top: 90px; width: 33px;  height: 33px;}
+.Portland {   left: 430px; top: 133px; width: 33px;  height: 33px;}
+.CrescentCity {   left: 389px; top: 200px; width: 34px;  height: 34px;}
+.SanFrancisco { left: 386px; top: 300px;  width: 37px;  height: 37px;}
+.Fresno {left: 426px; top: 342px; }
+.LosAngeles {left: 450px; top: 404px; width: 37px;  height: 37px;}
+.Mexicali {left: 489px; top: 440px;  width: 37px;  height: 37px;}
+.Catavina { left: 494px; top: 507px; width: 36px;  height: 36px;}
+.SantaRosalita {     left: 513px; top: 563px; width: 33px;  height: 33px;}
+.LaPaz { left: 552px; top: 635px; width: 33px;  height: 33px;}
+.LosMochis { left: 583px; top: 572px; width: 42px;  height: 42px;}
+.LosMochos {left: 536px; top: 505px; width: 42px;  height: 42px;}
+.Tucson {   left: 572px; top: 448px; width: 38px;  height: 38px;}
+.Juarez {left: 629px; top: 485px; width: 41px;  height: 41px;}
+.Chihuahua {left: 667px; top: 546px; }
+.Zacatecas {left: 688px; top: 634px; width: 43px;  height: 43px;}
+.Tampico {left: 787px; top: 657px; width: 41px;  height: 41px;}
+.Monterrey {left: 753px; top: 582px; }
+.Lubbock {left: 695px; top: 438px; width: 42px;  height: 42px;}
+.Snowflake {left: 659px; top: 352px; }
+.Phoenix {left: 570px; top: 378px; }
+.LasVegas { left: 508px; top: 350px; width: 37px;  height: 37px;}
+.Beaver { left: 580px; top: 303px; width: 36px;  height: 36px;}
+.Tonopah {left: 474px; top: 297px; width: 36px;  height: 36px;}
+.Sacramento {left: 428px; top: 260px;  width: 37px;  height: 37px;}
+.Ely {left: 531px; top: 259px; width: 36px;  height: 36px;}
+.SaltLakeCity { left: 597px; top: 232px;  width: 37px;  height: 37px;}
+.Doyle { left: 479px; top: 231px; width: 35px;  height: 35px;}
+.Yellowstone {left: 570px; top: 186px; width: 37px;  height: 37px;}
+.ColoradoSprings { left: 661px; top: 268px; }
+.Hugoton {left: 740px; top: 290px; }
+.Challis {left: 524px; top: 186px; width: 33px;  height: 33px;}
+.Burns {left: 460px; top: 170px;}
+.BigHorn {left: 637px; top: 173px; width: 41px;  height: 41px;}
+.Buffalo {left: 716px; top: 170px;   width: 42px;  height: 42px;}
+.Scouby {left: 688px; top: 113px; width: 36px;  height: 36px;}
+.Shelby { left: 599px; top: 120px; width: 37px;  height: 37px;}
+.Kalispell {left: 536px; top: 130px;  width: 35px;  height: 35px;}
+.Spokane { left: 486px; top: 116px; }
+.Kelowna {left: 500px; top: 61px; width: 34px;  height: 34px;}
+.Calgary {left: 566px; top: 50px; width: 35px;  height: 35px;}
+.Kindersley {left: 630px; top: 51px; width: 35px;  height: 35px;}
+.Saskatoon {left: 705px; top: 50px; width: 36px;  height: 36px;}
+.Cuba { left: 1110px; top: 640px; }
+.Maine { left: 1190px; top: 100px; }
+.SaintJonh { left: 1238px; top: 56px; }
