@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактор на Точки и Връзки</title>
+    <style>
+        #map-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        #map {
+            width: 100%;
+            height: auto;
+            border: 1px solid #000;
+        }
+        .point {
+            fill: blue;
+            cursor: pointer;
+        }
+        .selected {
+            fill: green;
+        }
+        #controls {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        #output {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Редактор на Точки и Връзки</h1>
+    <div id="map-container">
+        <svg id="map" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+            <!-- Фоновата Карта -->
+            <image href="image.jpg" width="1200" height="800"></image>
+        </svg>
+    </div>
+
+    <div id="controls">
+        <button id="add-point-btn">Добави Точка</button>
+        <button id="add-connection-btn" disabled>Добави Връзка</button>
+        <button id="finish-btn">Завърши и Генерирай</button>
+        <br><br>
+        <textarea id="output" readonly placeholder="Тук ще се появи генерираният код..."></textarea>
+    </div>
+
+    <script>
+        const svg = document.getElementById('map');
+        const addPointBtn = document.getElementById('add-point-btn');
+        const addConnectionBtn = document.getElementById('add-connection-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        const outputArea = document.getElementById('output');
+
+        let points = [];
+        let connections = [];
+        let pointIdCounter = 1;
+        let mode = null; // 'add-point' или 'add-connection'
+        let selectedPoints = [];
+
+        // Функция за рендиране на точките и връзките
+        function renderEditor() {
+            // Първо изтриваме всички съществуващи линии и точки
+            const existingLines = svg.querySelectorAll('.connection');
+            existingLines.forEach(line => line.remove());
+
+            const existingCircles = svg.querySelectorAll('.point');
+            existingCircles.forEach(circle => circle.remove());
+
+            // Рендираме връзките
+            connections.forEach(conn => {
+                const pointA = points.find(p => p.id === conn.from);
+                const pointB = points.find(p => p.id === conn.to);
+                if (pointA && pointB) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('class', 'connection');
+                    line.setAttribute('x1', pointA.x);
+                    line.setAttribute('y1', pointA.y);
+                    line.setAttribute('x2', pointB.x);
+                    line.setAttribute('y2', pointB.y);
+                    line.setAttribute('stroke', 'black');
+                    line.setAttribute('stroke-width', '2');
+                    svg.appendChild(line);
+                }
+            });
+
+            // Рендираме точките
+            points.forEach(point => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('class', 'point');
+                circle.setAttribute('id', point.id);
+                circle.setAttribute('cx', point.x);
+                circle.setAttribute('cy', point.y);
+                circle.setAttribute('r', 10);
+                svg.appendChild(circle);
+
+                // Добавяме обработчик за клик
+                circle.addEventListener('click', () => handlePointClick(point));
+            });
+        }
+
+        // Обработчик за клик върху точка
+        function handlePointClick(point) {
+            if (mode === 'add-connection') {
+                if (selectedPoints.length < 2) {
+                    selectedPoints.push(point);
+                    highlightPoint(point.id, true);
+                }
+                if (selectedPoints.length === 2) {
+                    // Добавяме връзка
+                    connections.push({ from: selectedPoints[0].id, to: selectedPoints[1].id });
+                    selectedPoints.forEach(p => highlightPoint(p.id, false));
+                    selectedPoints = [];
+                    mode = null;
+                    addConnectionBtn.disabled = false;
+                    addPointBtn.disabled = false;
+                    renderEditor();
+                }
+            }
+        }
+
+        // Функция за подчертаване на точка
+        function highlightPoint(id, highlight) {
+            const circle = document.getElementById(id);
+            if (circle) {
+                if (highlight) {
+                    circle.classList.add('selected');
+                } else {
+                    circle.classList.remove('selected');
+                }
+            }
+        }
+
+        // Обработчик за добавяне на точка
+        addPointBtn.addEventListener('click', () => {
+            mode = 'add-point';
+            addPointBtn.disabled = true;
+            addConnectionBtn.disabled = true;
+            alert('Кликнете върху картата, за да добавите нова точка.');
+        });
+
+        // Обработчик за добавяне на връзка
+        addConnectionBtn.addEventListener('click', () => {
+            if (points.length < 2) {
+                alert('Трябва да има поне две точки, за да добавите връзка.');
+                return;
+            }
+            mode = 'add-connection';
+            selectedPoints = [];
+            addPointBtn.disabled = true;
+            addConnectionBtn.disabled = true;
+            alert('Изберете две точки, между които да създадете връзка.');
+        });
+
+        // Обработчик за завършване и генериране на кода
+        finishBtn.addEventListener('click', () => {
+            const generatedPoints = points.map(p => ({
+                id: p.id,
+                x: p.x,
+                y: p.y,
+                connections: connections
+                    .filter(conn => conn.from === p.id)
+                    .map(conn => conn.to)
+            }));
+
+            const code = `const points = ${JSON.stringify(generatedPoints, null, 4)};`;
+
+            outputArea.value = code;
+            alert('Генерираният код е наличен в текстовото поле.');
+        });
+
+        // Обработчик за клик върху SVG картата
+        svg.addEventListener('click', (event) => {
+            if (mode === 'add-point') {
+                const rect = svg.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                const id = `point${pointIdCounter++}`;
+                points.push({ id, x, y });
+                mode = null;
+                addPointBtn.disabled = false;
+                addConnectionBtn.disabled = false;
+                renderEditor();
+            }
+        });
+
+        // Инициализиране на редактора
+        renderEditor();
+    </script>
+</body>
+</html>
